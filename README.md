@@ -22,4 +22,5 @@ Solo abre `index.html` en tu navegador. Eso es todo.
 
 ## Despliegue
 
-Desplegado con GitHub Pages desde la rama `main`.
+Desplegado con GitHub Pages desde la rama `main`. 
+.
