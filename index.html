@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Markplus — Marketplace universitario</title>
+<meta name="description" content="Markplus es el marketplace donde los estudiantes universitarios pueden vender sus productos, servicios y conocimientos." />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.0.0/dist/tabler-icons.min.css" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #FAFAF7;
+    --surface: #FFFFFF;
+    --border: rgba(0, 0, 0, 0.08);
+    --text: #1A1A1A;
+    --text-muted: #5F5E5A;
+    --text-light: #888780;
+    --primary: #534AB7;
+    --primary-dark: #3C3489;
+    --primary-50: #EEEDFE;
+    --primary-100: #CECBF6;
+    --primary-200: #AFA9EC;
+    --teal: #0F6E56;
+    --teal-50: #E1F5EE;
+    --teal-100: #9FE1CB;
+    --amber: #854F0B;
+    --amber-50: #FAEEDA;
+    --amber-100: #FAC775;
+    --pink: #993556;
+    --pink-50: #FBEAF0;
+    --pink-100: #F4C0D1;
+    --coral: #993C1D;
+    --coral-50: #FAECE7;
+    --coral-100: #F5C4B3;
+    --blue: #185FA5;
+    --blue-50: #E6F1FB;
+    --blue-100: #B5D4F4;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    color: var(--text);
+    background: var(--bg);
+    font-size: 16px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+  /* Header */
+  header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 50;
+  }
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 0;
+    gap: 24px;
+  }
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: var(--text);
+  }
+  .logo-mark {
+    width: 32px; height: 32px;
+    background: var(--primary);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    color: white; font-weight: 600; font-size: 14px;
+  }
+  .logo-text { font-weight: 600; font-size: 18px; }
+  .logo-text-group { display: flex; flex-direction: column; line-height: 1.1; }
+  .logo-sub { font-size: 10px; color: var(--text-light); font-weight: 500; margin-top: 2px; letter-spacing: 0.02em; }
+  .eduacceso-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    padding: 24px 0;
+    border-top: 1px solid #2C2C2A;
+    border-bottom: 1px solid #2C2C2A;
+    margin-bottom: 24px;
+  }
+  .eduacceso-row span { font-size: 13px; color: #B4B2A9; }
+  .eduacceso-row img {
+    height: 40px; width: auto;
+    border-radius: 6px;
+    display: block;
+  }
+  nav { display: flex; gap: 24px; }
+  nav a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.15s;
+  }
+  nav a:hover { color: var(--text); }
+  .header-actions { display: flex; align-items: center; gap: 12px; }
+  .search-input {
+    display: flex; align-items: center; gap: 8px;
+    background: var(--bg);
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-size: 13px;
+    color: var(--text-light);
+    width: 240px;
+    border: 1px solid transparent;
+    cursor: pointer;
+  }
+  .search-input:hover { border-color: var(--border); }
+  .icon-btn {
+    background: none; border: none;
+    width: 36px; height: 36px;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 8px;
+    cursor: pointer;
+    color: var(--text-muted);
+  }
+  .icon-btn:hover { background: var(--bg); }
+  .avatar {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    background: var(--teal-100);
+    color: #04342C;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 600; font-size: 12px;
+  }
+
+  /* Hero */
+  .hero {
+    background: var(--primary-50);
+    padding: 56px 0;
+  }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 48px;
+    align-items: center;
+  }
+  .pill {
+    display: inline-block;
+    background: white;
+    color: var(--primary-dark);
+    font-size: 12px;
+    font-weight: 500;
+    padding: 4px 12px;
+    border-radius: 999px;
+    margin-bottom: 16px;
+  }
+  .hero h1 {
+    font-size: 44px;
+    font-weight: 600;
+    line-height: 1.15;
+    color: #26215C;
+    margin-bottom: 16px;
+    letter-spacing: -0.02em;
+  }
+  .hero p {
+    font-size: 17px;
+    color: var(--primary-dark);
+    margin-bottom: 28px;
+    max-width: 480px;
+    line-height: 1.6;
+  }
+  .hero-cta { display: flex; gap: 12px; }
+  .btn {
+    padding: 12px 22px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    border: none;
+    transition: all 0.15s;
+    font-family: inherit;
+  }
+  .btn-primary { background: var(--primary); color: white; }
+  .btn-primary:hover { background: var(--primary-dark); }
+  .btn-secondary {
+    background: white;
+    color: var(--primary-dark);
+    border: 1px solid var(--primary-100);
+  }
+  .btn-secondary:hover { background: #F8F7FE; }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .stat-card {
+    background: white;
+    padding: 18px 20px;
+    border-radius: 12px;
+  }
+  .stat-num {
+    font-size: 24px;
+    font-weight: 600;
+    color: #26215C;
+    margin-bottom: 2px;
+  }
+  .stat-label {
+    font-size: 13px;
+    color: var(--primary-dark);
+  }
+  .stat-card.teal .stat-num { color: #04342C; }
+  .stat-card.teal .stat-label { color: var(--teal); }
+
+  /* Categories */
+  .categories {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 20px 0;
+  }
+  .cat-scroll {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    flex-wrap: wrap;
+  }
+  .chip {
+    background: var(--bg);
+    color: var(--text-muted);
+    padding: 8px 16px;
+    border-radius: 999px;
+    font-size: 13px;
+    cursor: pointer;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    border: none;
+    font-family: inherit;
+    transition: all 0.15s;
+  }
+  .chip:hover { background: #EFEEE7; }
+  .chip.active { background: #26215C; color: white; }
+
+  /* Listings */
+  .section { padding: 56px 0; }
+  .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 28px;
+  }
+  .section h2 {
+    font-size: 24px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+  .link {
+    color: var(--blue);
+    font-size: 14px;
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .link:hover { text-decoration: underline; }
+
+  .listings {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 20px;
+  }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.15s, box-shadow 0.15s;
+    cursor: pointer;
+  }
+  .card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+  }
+  .card-img {
+    height: 160px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .card-img i { font-size: 48px; }
+  .card-body { padding: 14px 16px; }
+  .seller-row {
+    display: flex; align-items: center; gap: 6px;
+    margin-bottom: 6px;
+  }
+  .seller-avatar {
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10px; font-weight: 600;
+  }
+  .seller-name {
+    font-size: 12px;
+    color: var(--text-muted);
+    flex: 1;
+  }
+  .verified { color: var(--teal); font-size: 14px; }
+  .card-title {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.4;
+    margin-bottom: 8px;
+    min-height: 38px;
+  }
+  .card-foot {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+  .price { font-size: 15px; font-weight: 600; }
+  .price small { font-size: 11px; color: var(--text-light); font-weight: 400; }
+  .rating { font-size: 12px; color: var(--text-muted); }
+  .rating i { color: var(--amber-100); font-size: 12px; }
+
+  /* How it works */
+  .how {
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+  .step {
+    padding: 24px;
+    border-radius: 12px;
+  }
+  .step i { font-size: 28px; margin-bottom: 12px; display: block; }
+  .step-num { font-size: 15px; font-weight: 600; margin-bottom: 4px; }
+  .step-desc { font-size: 13px; line-height: 1.5; }
+  .step-purple { background: var(--primary-50); color: var(--primary-dark); }
+  .step-purple i { color: var(--primary); }
+  .step-teal { background: var(--teal-50); color: #085041; }
+  .step-teal i { color: var(--teal); }
+  .step-amber { background: var(--amber-50); color: #633806; }
+  .step-amber i { color: var(--amber); }
+  .step-pink { background: var(--pink-50); color: #72243E; }
+  .step-pink i { color: var(--pink); }
+
+  /* Footer */
+  footer {
+    background: #1A1A1A;
+    color: #B4B2A9;
+    padding: 48px 0 24px;
+  }
+  .foot-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 40px;
+    margin-bottom: 32px;
+  }
+  .foot-grid h4 { color: white; font-size: 13px; margin-bottom: 14px; font-weight: 600; }
+  .foot-grid a { display: block; color: #B4B2A9; text-decoration: none; font-size: 13px; padding: 4px 0; }
+  .foot-grid a:hover { color: white; }
+  .foot-grid p { font-size: 13px; line-height: 1.6; max-width: 280px; margin-top: 12px; }
+  .foot-bottom {
+    border-top: 1px solid #2C2C2A;
+    padding-top: 20px;
+    font-size: 12px;
+    color: #888780;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  @media (max-width: 768px) {
+    .hero-grid { grid-template-columns: 1fr; }
+    .hero h1 { font-size: 32px; }
+    nav, .search-input { display: none; }
+    .steps { grid-template-columns: 1fr 1fr; }
+    .foot-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container header-inner">
+    <a href="#" class="logo">
+      <div class="logo-mark">M+</div>
+      <div class="logo-text-group">
+        <span class="logo-text">Markplus</span>
+        <span class="logo-sub">por EduAcceso</span>
+      </div>
+    </a>
+    <nav>
+      <a href="#explorar">Explorar</a>
+      <a href="#categorias">Categorías</a>
+      <a href="#universidades">Universidades</a>
+      <a href="#como-funciona">Cómo funciona</a>
+    </nav>
+    <div class="header-actions">
+      <div class="search-input">
+        <i class="ti ti-search"></i>
+        <span>Buscar talento o producto</span>
+      </div>
+      <button class="icon-btn" aria-label="Carrito"><i class="ti ti-shopping-cart"></i></button>
+      <div class="avatar">LR</div>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="container hero-grid">
+    <div>
+      <span class="pill">Marketplace universitario</span>
+      <h1>Estudia, emprende y crece. Todo desde un mismo lugar.</h1>
+      <p>Monetiza tu conocimiento, vende tus productos y conecta con la comunidad de tu campus sin dejar de estudiar.</p>
+      <div class="hero-cta">
+        <button class="btn btn-primary">Abrir mi tienda</button>
+        <button class="btn btn-secondary">Explorar marketplace</button>
+      </div>
+    </div>
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-num">+2.400</div>
+        <div class="stat-label">tiendas activas</div>
+      </div>
+      <div class="stat-card teal">
+        <div class="stat-num">+38</div>
+        <div class="stat-label">universidades</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">$ 1.2M</div>
+        <div class="stat-label">vendido este mes</div>
+      </div>
+      <div class="stat-card teal">
+        <div class="stat-num">96%</div>
+        <div class="stat-label">reseñas positivas</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="categories" id="categorias">
+  <div class="container cat-scroll">
+    <button class="chip active">Todos</button>
+    <button class="chip"><i class="ti ti-school"></i> Tutorías</button>
+    <button class="chip"><i class="ti ti-palette"></i> Diseño</button>
+    <button class="chip"><i class="ti ti-code"></i> Programación</button>
+    <button class="chip"><i class="ti ti-cake"></i> Comida</button>
+    <button class="chip"><i class="ti ti-shirt"></i> Moda</button>
+    <button class="chip"><i class="ti ti-camera"></i> Foto y video</button>
+    <button class="chip"><i class="ti ti-book"></i> Asesorías</button>
+  </div>
+</section>
+
+<section class="section" id="explorar">
+  <div class="container">
+    <div class="section-header">
+      <h2>Destacados de esta semana</h2>
+      <a href="#" class="link">Ver todos →</a>
+    </div>
+    <div class="listings">
+
+      <div class="card">
+        <div class="card-img" style="background: var(--pink-50);">
+          <i class="ti ti-math-function" style="color: var(--pink);"></i>
+        </div>
+        <div class="card-body">
+          <div class="seller-row">
+            <div class="seller-avatar" style="background: var(--pink-100); color: #4B1528;">VC</div>
+            <span class="seller-name">Valentina · Ing. Civil</span>
+            <i class="ti ti-circle-check verified"></i>
+          </div>
+          <div class="card-title">Tutorías de cálculo y álgebra lineal</div>
+          <div class="card-foot">
+            <span class="price">$25.000<small>/hora</small></span>
+            <span class="rating"><i class="ti ti-star-filled"></i> 4.9</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-img" style="background: var(--amber-50);">
+          <i class="ti ti-cookie" style="color: var(--amber);"></i>
+        </div>
+        <div class="card-body">
+          <div class="seller-row">
+            <div class="seller-avatar" style="background: var(--amber-100); color: #412402;">SM</div>
+            <span class="seller-name">Santiago · Gastronomía</span>
+            <i class="ti ti-circle-check verified"></i>
+          </div>
+          <div class="card-title">Brownies artesanales (caja x6)</div>
+          <div class="card-foot">
+            <span class="price">$18.000</span>
+            <span class="rating"><i class="ti ti-star-filled"></i> 5.0</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-img" style="background: var(--teal-50);">
+          <i class="ti ti-brand-figma" style="color: var(--teal);"></i>
+        </div>
+        <div class="card-body">
+          <div class="seller-row">
+            <div class="seller-avatar" style="background: var(--teal-100); color: #04342C;">MR</div>
+            <span class="seller-name">Mariana · Diseño Gráfico</span>
+            <i class="ti ti-circle-check verified"></i>
+          </div>
+          <div class="card-title">Diseño de logo y manual de marca</div>
+          <div class="card-foot">
+            <span class="price">$120.000</span>
+            <span class="rating"><i class="ti ti-star-filled"></i> 4.8</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-img" style="background: var(--primary-50);">
+          <i class="ti ti-device-laptop" style="color: var(--primary);"></i>
+        </div>
+        <div class="card-body">
+          <div class="seller-row">
+            <div class="seller-avatar" style="background: var(--primary-100); color: #26215C;">AD</div>
+            <span class="seller-name">Andrés · Ing. Sistemas</span>
+            <i class="ti ti-circle-check verified"></i>
+          </div>
+          <div class="card-title">Landing page con Next.js</div>
+          <div class="card-foot">
+            <span class="price">$280.000</span>
+            <span class="rating"><i class="ti ti-star-filled"></i> 4.9</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-img" style="background: var(--coral-50);">
+          <i class="ti ti-camera" style="color: var(--coral);"></i>
+        </div>
+        <div class="card-body">
+          <div class="seller-row">
+            <div class="seller-avatar" style="background: var(--coral-100); color: #4A1B0C;">LP</div>
+            <span class="seller-name">Laura · Com. Social</span>
+            <i class="ti ti-circle-check verified"></i>
+          </div>
+          <div class="card-title">Sesión de fotos para grados</div>
+          <div class="card-foot">
+            <span class="price">$95.000</span>
+            <span class="rating"><i class="ti ti-star-filled"></i> 4.7</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-img" style="background: var(--blue-50);">
+          <i class="ti ti-notebook" style="color: var(--blue);"></i>
+        </div>
+        <div class="card-body">
+          <div class="seller-row">
+            <div class="seller-avatar" style="background: var(--blue-100); color: #042C53;">JG</div>
+            <span class="seller-name">Juan · Derecho</span>
+            <i class="ti ti-circle-check verified"></i>
+          </div>
+          <div class="card-title">Asesoría de tesis y normas APA</div>
+          <div class="card-foot">
+            <span class="price">$40.000<small>/hora</small></span>
+            <span class="rating"><i class="ti ti-star-filled"></i> 5.0</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-img" style="background: var(--teal-50);">
+          <i class="ti ti-language" style="color: var(--teal);"></i>
+        </div>
+        <div class="card-body">
+          <div class="seller-row">
+            <div class="seller-avatar" style="background: var(--teal-100); color: #04342C;">DM</div>
+            <span class="seller-name">Daniela · Lenguas Modernas</span>
+            <i class="ti ti-circle-check verified"></i>
+          </div>
+          <div class="card-title">Traducciones inglés - español</div>
+          <div class="card-foot">
+            <span class="price">$30.000<small>/página</small></span>
+            <span class="rating"><i class="ti ti-star-filled"></i> 4.9</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-img" style="background: var(--pink-50);">
+          <i class="ti ti-shirt" style="color: var(--pink);"></i>
+        </div>
+        <div class="card-body">
+          <div class="seller-row">
+            <div class="seller-avatar" style="background: var(--pink-100); color: #4B1528;">CN</div>
+            <span class="seller-name">Camila · Diseño de Modas</span>
+            <i class="ti ti-circle-check verified"></i>
+          </div>
+          <div class="card-title">Camisetas oversize personalizadas</div>
+          <div class="card-foot">
+            <span class="price">$55.000</span>
+            <span class="rating"><i class="ti ti-star-filled"></i> 4.8</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="section how" id="como-funciona">
+  <div class="container">
+    <div class="section-header">
+      <h2>Cómo funciona Markplus</h2>
+    </div>
+    <div class="steps">
+      <div class="step step-purple">
+        <i class="ti ti-id-badge-2"></i>
+        <div class="step-num">1. Verifica</div>
+        <div class="step-desc">Con tu correo institucional confirmamos que eres estudiante activo.</div>
+      </div>
+      <div class="step step-teal">
+        <i class="ti ti-building-store"></i>
+        <div class="step-num">2. Abre tu tienda</div>
+        <div class="step-desc">En menos de 5 minutos publicas tu primer producto o servicio.</div>
+      </div>
+      <div class="step step-amber">
+        <i class="ti ti-shopping-bag"></i>
+        <div class="step-num">3. Vende</div>
+        <div class="step-desc">Productos, servicios o cursos. Tú defines precios y horarios.</div>
+      </div>
+      <div class="step step-pink">
+        <i class="ti ti-trending-up"></i>
+        <div class="step-num">4. Crece</div>
+        <div class="step-desc">Mide tus ventas, recibe reseñas y escala tu negocio universitario.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="foot-grid">
+      <div>
+        <div class="logo" style="color: white;">
+          <div class="logo-mark">M+</div>
+          <span class="logo-text" style="color: white;">Markplus</span>
+        </div>
+        <p>El ecosistema donde los estudiantes universitarios estudian, emprenden y crecen al mismo tiempo.</p>
+      </div>
+      <div>
+        <h4>Producto</h4>
+        <a href="#">Explorar</a>
+        <a href="#">Cómo funciona</a>
+        <a href="#">Precios</a>
+      </div>
+      <div>
+        <h4>Comunidad</h4>
+        <a href="#">Universidades</a>
+        <a href="#">Historias</a>
+        <a href="#">Blog</a>
+      </div>
+      <div>
+        <h4>Soporte</h4>
+        <a href="#">Centro de ayuda</a>
+        <a href="#">Contacto</a>
+        <a href="#">Términos</a>
+      </div>
+    </div>
+    <div class="eduacceso-row">
+      <span>Una iniciativa de</span>
+      <img src="eduacceso-logo.jpg" alt="EduAcceso" />
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Markplus. Todos los derechos reservados.</span>
+      <span>Hecho por y para estudiantes.</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
